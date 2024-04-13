@@ -1,0 +1,41 @@
+import cv2
+import numpy as np
+
+pic = '1673663548_hakkon-club-p-samaya-luchshaya-zhena-vkontakte-54.jpg'
+
+def img_transformation(img):
+    img_old = cv2.imread(img)
+    resize = cv2.resize(img_old, (500, 500))
+    grey_img = cv2.cvtColor(resize, cv2.COLOR_BGR2GRAY)
+    blur_img = cv2.GaussianBlur(grey_img, (5, 5), 0)
+    cann_img = cv2.Canny(blur_img, 100, 140)
+    con, hir = cv2.findContours(cann_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    print(hir)
+    sel_con = []
+    (sel_con.append(con[59]),sel_con.append(con[58]),sel_con.append(con[57]),sel_con.append(con[56]),
+     sel_con.append(con[55]),sel_con.append(con[55]),sel_con.append(con[54]),sel_con.append(con[53]),
+     sel_con.append(con[52]),sel_con.append(con[51]),sel_con.append(con[50]),sel_con.append(con[49]),
+     sel_con.append(con[48]),sel_con.append(con[47]),sel_con.append(con[46]),sel_con.append(con[45]),
+     sel_con.append(con[44]),sel_con.append(con[43]),sel_con.append(con[42]),sel_con.append(con[41]),
+     sel_con.append(con[40]),sel_con.append(con[39]),sel_con.append(con[38]),sel_con.append(con[37]),
+     sel_con.append(con[36]),sel_con.append(con[35]),sel_con.append(con[34]),sel_con.append(con[33]),
+     sel_con.append(con[32]),sel_con.append(con[31]))
+    sel_con_2 = []
+    (sel_con_2.append(con[30]),sel_con_2.append(con[29]),sel_con_2.append(con[28]),sel_con_2.append(con[27]),
+     sel_con_2.append(con[26]),sel_con_2.append(con[25]),sel_con_2.append(con[24]),sel_con_2.append(con[23]),
+     sel_con_2.append(con[22]),sel_con_2.append(con[21]),sel_con_2.append(con[20]))
+    sel_con_3 = []
+    (sel_con_3.append(con[19]),sel_con_3.append(con[18]),sel_con_3.append(con[17]),sel_con_3.append(con[16]),
+     sel_con_3.append(con[15]),sel_con_3.append(con[14]),sel_con_3.append(con[13]),sel_con_3.append(con[12]),
+     sel_con_3.append(con[11]),sel_con_3.append(con[10]),sel_con_3.append(con[9]),sel_con_3.append(con[8]),
+     sel_con_3.append(con[7]),sel_con_3.append(con[6]),sel_con_3.append(con[5]),sel_con_3.append(con[4]),
+     sel_con_3.append(con[3]),sel_con_3.append(con[2]),sel_con_3.append(con[1]),sel_con_3.append(con[0]))
+    new_img = np.zeros(img_old.shape, dtype='uint8')
+    draw_1 = cv2.drawContours(new_img, sel_con , -1, (1, 246, 249), 1)
+    draw_2 = cv2.drawContours(new_img, sel_con_2, -1, (8, 8, 184), 1)
+    draw_3 = cv2.drawContours(new_img, sel_con_3, -1, (209, 5, 29), 1)
+    cv2.imshow('res', new_img)
+    cv2.waitKey(0)
+    cv2.imwrite('result.jpg',new_img)
+img_transformation(pic)
+
